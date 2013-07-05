@@ -1,14 +1,8 @@
 var express = require('express');
-var app = express()
+var OutputChannel = require('../Channel').OutputChannel;
 
-function setLEDOn(flag){
-  var gpio = require('pi-gpio');
-  gpio.open(11, "output", function(err){
-    gpio.write(11, flag===true?1:0, function(){
-      gpio.close(11);
-    });
-  });
-}
+var app = express(),
+    c11 = new OutputChannel(11);
 
 app.get('/hello.txt', function(req, res){
   var body = 'Hello, World';
@@ -16,21 +10,21 @@ app.get('/hello.txt', function(req, res){
 });
 
 app.get('/on', function(req, res){
-  setLEDOn(true);
+  c11.turnOn();
   res.send('success');
 });
 
 app.get('/off', function(req, res){
-  setLEDOn(false);
+  c11.turnOff();
   res.send('success');
 });
 
 app.get('/led', function(req, res){
   var html="<!DOCTYPE html><html><body><a href='?status=on'>on</a> <a href='?status=off'>off</a></body></html>";
   if ( req.param('status') === 'on' ){
-    setLEDOn(true);
+    c11.turnOn();
   } else {
-    setLEDOn(false);
+    c11.turnOff();
   }
   res.send(html);
   
