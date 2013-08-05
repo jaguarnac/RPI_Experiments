@@ -1,0 +1,3 @@
+[submodule "node/RPi-LPD8806-node"]
+	path = node/RPi-LPD8806-node
+	url = https://github.com/jaguarnac/RPi-LPD8806-node.git
