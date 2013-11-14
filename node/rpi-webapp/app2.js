@@ -31,7 +31,9 @@ app.get('/', function(req, res){
   }
   
  
-  html="<!DOCTYPE html><html><body>";
+  html="<!DOCTYPE html><html>";
+  html += '<head><meta name="viewport" content="width=device-width, user-scalable=no"></head>';
+  html += '<body>';
   for (var i=0; i<channels.length; i++){
     html += '<div>';
     html += ' CHANNEL '+i+' : ';
